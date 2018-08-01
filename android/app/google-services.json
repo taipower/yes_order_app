@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "813142257359",
+    "firebase_url": "https://yes-order.firebaseio.com",
+    "project_id": "yes-order",
+    "storage_bucket": "yes-order.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813142257359:android:21ccb5ec4d3ec795",
+        "android_client_info": {
+          "package_name": "com.taipower.yesorderapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813142257359-fe19dc1gqiuku1csf2nc29cv1iu35m1i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.taipower.yesorderapp",
+            "certificate_hash": "9da2f2a5663b1f3872680a5fa5b492120b2375d8"
+          }
+        },
+        {
+          "client_id": "813142257359-9odpbuss1432hc6crsr9a2lh6igmjtfa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO5hzDtpZtY5VeuefLRO5QzRvJ8TWxmmo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813142257359-9odpbuss1432hc6crsr9a2lh6igmjtfa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
