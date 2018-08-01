@@ -16,9 +16,9 @@ For help getting started with Flutter, view our online
 - Cutoff stock
 
 ## Dependencies
-Firebase
-Firebase Sign in
-Redux
+- Firebase
+- Firebase Sign in
+- Redux
 
 ## Getting Started
 1. Setup Flutter
