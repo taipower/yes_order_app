@@ -23,8 +23,8 @@ For help getting started with Flutter, view our online
 ## Getting Started
 1. Setup Flutter
 2. Clone the repo
-git clone https://github.com/taipower/yes_order_app.git
-cd yes_order_app
+- git clone https://github.com/taipower/yes_order_app.git
+- cd yes_order_app
 3. Setup Firebase
 - You'll need to create a Firebase instance. Follow the instructions at https://console.firebase.google.com.
 Once your Firebase instance is created, you'll need to enable anonymous authentication.
