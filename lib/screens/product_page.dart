@@ -5,6 +5,7 @@ import 'package:yes_order_app/redux/redux_state.dart';
 import 'package:yes_order_app/model/ProductItem.dart';
 import 'package:yes_order_app/widgets/product_list_item.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:yes_order_app/untils/utils.dart';
 
 class _ProductPageViewModel{
   final List<ProductItem> entries;
@@ -44,7 +45,7 @@ class ProductPage extends StatelessWidget{
             itemBuilder: (buildContext, index){
               return new InkWell(
                   onTap: () => _showOrderPicker(context, viewModel,
-                      viewModel.order[index], viewModel.entries),
+                      viewModel.order[index]),
                   child: new ProductListItem(viewModel.order[index]));
             },
           ),
@@ -54,7 +55,7 @@ class ProductPage extends StatelessWidget{
   }
 
   _showOrderPicker(BuildContext context, _ProductPageViewModel viewModel,
-      ProductItem orderItem, List<ProductItem> entries){
+      ProductItem orderItem){
     showDialog<int>(
         context: context,
       builder: (context) =>
@@ -68,14 +69,7 @@ class ProductPage extends StatelessWidget{
       if(value != null){
         bool successful = false;
 
-        entries.forEach((entry){
-          print("orderItem : " + orderItem.key + ",entry.key : " + entry.key);
-          if(orderItem.key == entry.key){
-            if(value <= entry.number){
-              successful = true;
-            }
-          }
-        });
+        successful = Utils.checkStock(value, orderItem.key, viewModel.entries);
 
         if(successful){
           viewModel.onItemChanged(orderItem..number = value);
@@ -103,5 +97,19 @@ class ProductPage extends StatelessWidget{
         );
       },
     );
+  }
+
+   _checkStock(int value, String key, List<ProductItem> entries){
+    bool successful = false;
+
+    entries.forEach((entry){
+      if(key == entry.key){
+        if(value <= entry.number){
+          successful = true;
+        }
+      }
+    });
+
+    return successful;
   }
 }

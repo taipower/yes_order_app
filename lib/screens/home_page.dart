@@ -111,14 +111,6 @@ class HomePageState extends State<HomePage>
     );
   }
 
-  _scrollToTap(){
-    _scrollViewController.animateTo(
-      0.0,
-      duration: const Duration(microseconds: 1),
-      curve: new ElasticInCurve(0.01),
-    );
-  }
-
   List<Widget> _buildMenuActions(BuildContext context, HomePageViewModel viewModel){
     List<Widget> actions = [
       new IconButton(
@@ -142,7 +134,6 @@ class HomePageState extends State<HomePage>
   _openCartDialog(BuildContext context, HomePageViewModel viewModel) async{
     List<ProductItem> cart = new List();
     viewModel.order.forEach((entry){
-      print("Check number : " + entry.number.toString());
       if(entry.number > 0){
         cart.add(entry);
       }

@@ -10,15 +10,13 @@ class DialogViewModel{
   final Function(ProductItem) onItemChanged;
   final Function() onDeletePressed;
   final Function() onSavePressed;
-  final Function() onLoadChhanged;
 
   DialogViewModel({
     this.productItem,
     this.isEditMode,
     this.onItemChanged,
     this.onDeletePressed,
-    this.onSavePressed,
-    this.onLoadChhanged
+    this.onSavePressed
   });
 }
 
@@ -67,11 +65,8 @@ class ProductItemDialogState extends State<ProductItemDialog>{
               store.dispatch(new AddItemAction(activeItem));
             }
             Navigator.of(context).pop();
-          },
-          onLoadChhanged: (){
-            store.dispatch(new SetLoadAction('loadProduct'));
           }
-          );
+        );
       },
       builder: (context, viewModel){
         return new Scaffold(
