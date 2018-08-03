@@ -42,6 +42,10 @@ $ flutter run
 - Add product for Mock Data click ENTER button => click setting => Add your product
 - For payment credit card number 4242424242424242 is successful, other is fail
 
+## Run Unit Test
+- Goto root project run
+- flutter test
+
 ## Reference
 - https://github.com/MSzalek-Mobile/weight_tracker/tree/master
 - https://github.com/theankurkedia/newsbuzz
