@@ -9,13 +9,11 @@ import 'package:yes_order_app/screens/home_page.dart';
 class MainPageViewModel{
   final List<ProductItem> order;
   final List<OrderItem> orderList;
-  final Function() onLoadChanged;
   final Function onEnterToShopping;
 
   MainPageViewModel({
     this.order,
     this.orderList,
-    this.onLoadChanged,
     this.onEnterToShopping
   });
 }
@@ -53,9 +51,6 @@ class MainPageState extends State<MainPage>
           return new MainPageViewModel(
             order: store.state.order,
             orderList: store.state.orderList,
-            onLoadChanged: (){
-              store.dispatch(new SetLoadAction('loadOrder'));
-            },
             onEnterToShopping: (){
               Navigator.of(context).pushReplacement(new MaterialPageRoute(
                   builder: (BuildContext context){

@@ -4,16 +4,15 @@ import 'package:yes_order_app/redux/actions.dart';
 import 'package:yes_order_app/redux/redux_state.dart';
 import 'package:meta/meta.dart';
 import 'package:yes_order_app/model/ProductItem.dart';
+import 'package:yes_order_app/untils/utils.dart';
 
 @immutable
 class ThanksScreenViewModel{
   final List<ProductItem> entries;
-  final Function() onLoadChanged;
   final Function() onComplete;
 
   ThanksScreenViewModel({
     this.entries,
-    this.onLoadChanged,
     this.onComplete
   });
 }
@@ -30,18 +29,16 @@ class ThanksScreen extends StatelessWidget{
     return new StoreConnector<ReduxState, ThanksScreenViewModel>(
         converter: (store){
           if(_updateProduct){
-            store.state.entries.forEach((entry){
-              cart.forEach((chartEntry){
-                if(entry.key == chartEntry.key){
-                  entry.number = entry.number - chartEntry.number;
-                }
-              });
+            List<ProductItem> cutoffProduct = new List();
+            cutoffProduct = Utils.cutoffStock(cart, store.state.entries);
+            store.state.entries.clear();
+            cutoffProduct.forEach((entry){
+              store.state.entries.add(entry);
             });
+
+            _updateProduct = false;
           }
           return new ThanksScreenViewModel(
-              onLoadChanged: (){
-                store.dispatch(new SetLoadAction('loadProduct'));
-              },
               onComplete: (){
                 store.dispatch(new SetLoadAction('loadProduct'));
                 Navigator.of(context).pop();

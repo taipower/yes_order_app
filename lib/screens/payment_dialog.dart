@@ -7,17 +7,16 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:yes_order_app/redux/actions.dart';
 import 'package:yes_order_app/redux/redux_state.dart';
 import 'package:yes_order_app/screens/thanks_screen.dart';
+import 'package:yes_order_app/untils/utils.dart';
 
 class DialogViewModel{
   final OrderItem orderList;
   final Function() onPaymentPress;
-  final Function() onLoadChanged;
   final Function(OrderItem) onItemChanged;
 
   DialogViewModel({
     this.orderList,
     this.onPaymentPress,
-    this.onLoadChanged,
     this.onItemChanged
   });
 }
@@ -103,7 +102,7 @@ class PaymentDialogState extends State<PaymentDialog>{
               new Future.delayed(new Duration(seconds: 2), (){
                 Navigator.of(context).pop();
                 store.dispatch(new SetLoadAction('loadOrder'));
-                _successful = _paymentProcess();
+                _successful = Utils.paymentProcess(_cardNumber);
 
                 if(!_successful){
                   _showAlertDialog();
@@ -113,9 +112,6 @@ class PaymentDialogState extends State<PaymentDialog>{
                   store.dispatch(new AddOrderItemAction(activeItem));
                 }
               });
-            },
-            onLoadChanged: (){
-              store.dispatch(new SetLoadAction('loadOrder'));
             },
             onItemChanged: (entry) =>
                 store.dispatch(new UpdateActiveOrderItem(entry)),
@@ -205,17 +201,6 @@ class PaymentDialogState extends State<PaymentDialog>{
       title: title,
       actions: actions,
     );
-  }
-
-  _paymentProcess(){
-      bool successful = false;
-
-      if(_cardNumber == '4242-4242-4242-4242' || _cardNumber == '4242424242424242'){
-        successful = true;
-        return successful;
-      }
-
-      return successful;
   }
 
   void _showAlertDialog() async{

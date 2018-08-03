@@ -5,6 +5,7 @@ import 'package:yes_order_app/redux/redux_state.dart';
 import 'package:yes_order_app/model/ProductItem.dart';
 import 'package:yes_order_app/widgets/product_list_item.dart';
 import 'package:yes_order_app/screens/payment_dialog.dart';
+import 'package:yes_order_app/untils/utils.dart';
 
 class DialogViewModel{
   final List<ProductItem> cartEntries;
@@ -38,10 +39,7 @@ class CartEntryDialogState extends State<CartEntryDialog>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    totalPrice = 0.0;
-    cart.forEach((entry){
-      totalPrice += entry.price * double.parse(entry.number.toString());
-    });
+    totalPrice = Utils.computeTotalPrice(cart);
   }
 
   @override
