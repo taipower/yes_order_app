@@ -74,42 +74,10 @@ class ProductPage extends StatelessWidget{
         if(successful){
           viewModel.onItemChanged(orderItem..number = value);
         }else{
-          _showAlertDialog(context);
+            Utils.showAlertDialog(context, "Alert Dialog",
+                "Sorry our product less than your need!", "OK");
         }
       }
     });
-  }
-
-  _showAlertDialog(BuildContext context) async{
-    showDialog(
-      context: context,
-      builder: (BuildContext context){
-        return new AlertDialog(
-          title: Text("Alert Dialog"),
-          content: Text("Sorry our product less than your need!"),
-          actions: <Widget>[
-            new FlatButton(
-                onPressed: (){
-                  Navigator.of(context).pop();
-                },
-                child: new Text('OK'))
-          ],
-        );
-      },
-    );
-  }
-
-   _checkStock(int value, String key, List<ProductItem> entries){
-    bool successful = false;
-
-    entries.forEach((entry){
-      if(key == entry.key){
-        if(value <= entry.number){
-          successful = true;
-        }
-      }
-    });
-
-    return successful;
   }
 }

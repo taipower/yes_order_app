@@ -8,6 +8,7 @@ import 'package:yes_order_app/screens/settings_screen.dart';
 import 'package:yes_order_app/screens/cart_entry_dialog.dart';
 import 'package:yes_order_app/model/ProductItem.dart';
 import 'package:yes_order_app/model/OrderItem.dart';
+import 'package:yes_order_app/untils/utils.dart';
 
 class HomePageViewModel{
   final List<ProductItem> order;
@@ -148,26 +149,7 @@ class HomePageState extends State<HomePage>
         },
       ));
     }else{
-      _showAlertDialog();
+        Utils.showAlertDialog(context, "Alert Dialog", "Please choose your product!", "OK");
     }
-  }
-
-  void _showAlertDialog() async{
-    showDialog(
-      context: context,
-      builder: (BuildContext context){
-        return new AlertDialog(
-          title: Text("Alert Dialog"),
-          content: Text("Please choose your product!"),
-          actions: <Widget>[
-            new FlatButton(
-                onPressed: (){
-                  Navigator.of(context).pop();
-                },
-                child: new Text('OK'))
-          ],
-        );
-      },
-    );
   }
 }

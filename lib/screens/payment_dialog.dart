@@ -102,10 +102,13 @@ class PaymentDialogState extends State<PaymentDialog>{
               new Future.delayed(new Duration(seconds: 2), (){
                 Navigator.of(context).pop();
                 store.dispatch(new SetLoadAction('loadOrder'));
-                _successful = Utils.paymentProcess(_cardNumber);
+                  _successful = Utils.validateCreditCard(_textControllerName.text,
+                      _textControllerNumer.text, _textControllerExpire.text,
+                      _textControllerCVV.text);
 
                 if(!_successful){
-                  _showAlertDialog();
+                    Utils.showAlertDialog(context, "Alert Dialog",
+                        "Please chek your credit card!", "OK");
                 }else{
                   Navigator.of(context).pushReplacement(new MaterialPageRoute(
                       builder: (BuildContext context) => new ThanksScreen(cart)));
@@ -143,6 +146,7 @@ class PaymentDialogState extends State<PaymentDialog>{
                       ),
                       controller: _textControllerNumer,
                       keyboardType: TextInputType.number,
+                      maxLength: 19,
                       onChanged: (value){
                         _cardNumber = value;
                       },
@@ -156,6 +160,7 @@ class PaymentDialogState extends State<PaymentDialog>{
                       ),
                       controller: _textControllerExpire,
                       keyboardType: TextInputType.datetime,
+                      maxLength: 7,
                       onChanged: (value){
                         _date = value;
                       },
@@ -169,6 +174,7 @@ class PaymentDialogState extends State<PaymentDialog>{
                       ),
                       controller: _textControllerCVV,
                       keyboardType: TextInputType.number,
+                      maxLength: 3,
                       onChanged: (value){
                         _cvv = value;
                       },
@@ -200,25 +206,6 @@ class PaymentDialogState extends State<PaymentDialog>{
     return new AppBar(
       title: title,
       actions: actions,
-    );
-  }
-
-  void _showAlertDialog() async{
-    showDialog(
-        context: context,
-        builder: (BuildContext context){
-          return new AlertDialog(
-            title: Text("Alert Dialog"),
-            content: Text("Please chek your credit card."),
-            actions: <Widget>[
-              new FlatButton(
-                  onPressed: (){
-                    Navigator.of(context).pop();
-                  },
-                  child: new Text('OK'))
-            ],
-          );
-        },
     );
   }
 }
