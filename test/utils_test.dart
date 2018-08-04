@@ -79,5 +79,29 @@ void main() {
             expect(Utils.paymentProcess('4232-4242-2222-4242'), false);
             expect(Utils.paymentProcess('4242424242424242'), true);
         });
+
+        test('test validate credit card', (){
+            String cardhloderName = "";
+            String cardNumber = "";
+            String expire = "";
+            String cvv = "";
+
+            expect(Utils.validateCreditCard(cardhloderName, cardNumber, expire, cvv), false);
+            cardhloderName = "Test Holder Name";
+            expect(Utils.validateCreditCard(cardhloderName, cardNumber, expire, cvv), false);
+            cardNumber = "4242424242424242";
+            expect(Utils.validateCreditCard(cardhloderName, cardNumber, expire, cvv), false);
+            cardNumber = "4242-4242-4242-4242";
+            expect(Utils.validateCreditCard(cardhloderName, cardNumber, expire, cvv), false);
+            expire = "10/2020";
+            expect(Utils.validateCreditCard(cardhloderName, cardNumber, expire, cvv), false);
+            cvv = "123";
+            expect(Utils.validateCreditCard(cardhloderName, cardNumber, expire, cvv), true);
+            cardNumber = "4242424242423333";
+            expect(Utils.validateCreditCard(cardhloderName, cardNumber, expire, cvv), false);
+            cardNumber = "4242-4242-4242-4242";
+            expire = "102018";
+            expect(Utils.validateCreditCard(cardhloderName, cardNumber, expire, cvv), false);
+        });
     });
 }

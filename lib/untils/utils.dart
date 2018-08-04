@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:yes_order_app/model/ProductItem.dart';
 
 class Utils{
@@ -51,5 +52,54 @@ class Utils{
     });
 
     return totalPrice;
+  }
+
+  static void showAlertDialog(BuildContext context, String title,
+      String message, String titleButton) async{
+    showDialog(
+      context: context,
+      builder: (BuildContext context){
+        return new AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            new FlatButton(
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+                child: new Text(titleButton))
+          ],
+        );
+      },
+    );
+  }
+
+  static bool validateCreditCard(String cardhloderName, String cardNumber,
+      String expire, String cvv){
+    bool successful = false;
+
+    if(!(cardhloderName.isEmpty || cardNumber.isEmpty || expire.isEmpty || cvv.isEmpty)){
+      if(cardNumber.trim().length < 16 || cvv.trim().length < 3){
+        successful = false;
+      }else{
+        if(checkDateFormat(expire)){
+          successful = paymentProcess(cardNumber);
+        }else{
+          successful = false;
+        }
+      }
+    }
+
+    return successful;
+  }
+
+  static bool checkDateFormat(String expire){
+    bool successful = false;
+
+    if(expire.contains('/')){
+      successful = true;
+    }
+
+    return successful;
   }
 }
