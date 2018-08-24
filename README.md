@@ -28,7 +28,7 @@ Once your Firebase instance is created, you'll need to enable anonymous authenti
 - Click the "sign-in method" tab.
 - Click "Anonymous" and enable it.
 3.1 Running on Android
-- Create an app within your Firebase instance for Android, with package name com.taipowerrapp .
+- Create an app within your Firebase instance for Android, with package name com.taipower.yesorderapp .
 - Download google-services.json . 
 - place google-services.json into yes_order_app/android/app/.
 3.2 Running on IOS
